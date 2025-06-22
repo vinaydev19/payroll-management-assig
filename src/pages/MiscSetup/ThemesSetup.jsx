@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const ThemesSetup = () => {
+function ThemesSetup() {
   return (
-    <div>
-      ThemesSetup Page
-    </div>
-  );
-};
+    <div>ThemesSetup</div>
+  )
+}
 
-export default ThemesSetup;
+export default ThemesSetup

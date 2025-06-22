@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const AdvanceEntry = () => {
+function AdvanceEntry() {
   return (
-    <div>
-      AdvanceEntry Page
-    </div>
-  );
-};
+    <div>AdvanceEntry</div>
+  )
+}
 
-export default AdvanceEntry;
+export default AdvanceEntry

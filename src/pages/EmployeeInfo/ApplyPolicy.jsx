@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const ApplyPolicy = () => {
+function ApplyPolicy() {
   return (
-    <div>
-      ApplyPolicy Page
-    </div>
-  );
-};
+    <div>ApplyPolicy</div>
+  )
+}
 
-export default ApplyPolicy;
+export default ApplyPolicy

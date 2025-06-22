@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const UserMaster = () => {
+function UserMaster() {
   return (
-    <div>
-      UserMaster Page
-    </div>
-  );
-};
+    <div>UserMaster</div>
+  )
+}
 
-export default UserMaster;
+export default UserMaster

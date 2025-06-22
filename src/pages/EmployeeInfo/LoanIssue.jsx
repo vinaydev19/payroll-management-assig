@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const LoanIssue = () => {
+function LoanIssue() {
   return (
-    <div>
-      LoanIssue Page
-    </div>
-  );
-};
+    <div>LoanIssue</div>
+  )
+}
 
-export default LoanIssue;
+export default LoanIssue

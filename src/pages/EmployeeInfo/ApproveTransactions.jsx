@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const ApproveTransactions = () => {
+function ApproveTransactions() {
   return (
-    <div>
-      ApproveTransactions Page
-    </div>
-  );
-};
+    <div>ApproveTransactions</div>
+  )
+}
 
-export default ApproveTransactions;
+export default ApproveTransactions

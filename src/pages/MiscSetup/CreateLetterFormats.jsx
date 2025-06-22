@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const CreateLetterFormats = () => {
+function CreateLetterFormats() {
   return (
-    <div>
-      CreateLetterFormats Page
-    </div>
-  );
-};
+    <div>CreateLetterFormats</div>
+  )
+}
 
-export default CreateLetterFormats;
+export default CreateLetterFormats

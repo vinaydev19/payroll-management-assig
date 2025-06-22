@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const ApplyAllowance = () => {
+function ApplyAllowance() {
   return (
-    <div>
-      ApplyAllowance Page
-    </div>
-  );
-};
+    <div>ApplyAllowance</div>
+  )
+}
 
-export default ApplyAllowance;
+export default ApplyAllowance

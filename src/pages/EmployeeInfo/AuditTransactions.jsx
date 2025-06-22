@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const AuditTransactions = () => {
+function AuditTransactions() {
   return (
-    <div>
-      AuditTransactions Page
-    </div>
-  );
-};
+    <div>AuditTransactions</div>
+  )
+}
 
-export default AuditTransactions;
+export default AuditTransactions

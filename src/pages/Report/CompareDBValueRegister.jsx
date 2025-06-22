@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const CompareDBValueRegister = () => {
+function CompareDBValueRegister() {
   return (
-    <div>
-      CompareDBValueRegister Page
-    </div>
-  );
-};
+    <div>CompareDBValueRegister</div>
+  )
+}
 
-export default CompareDBValueRegister;
+export default CompareDBValueRegister

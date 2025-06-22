@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import logo from '../../assets/logo2.png';
-import { ChevronDown, ChevronRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { Button } from '../ui/button';
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import logo from "../../assets/logo2.png";
+import { ChevronDown, ChevronRight } from "lucide-react";
+import { Button } from "../ui/button";
 
 const menuItems = [
   {
@@ -20,7 +20,7 @@ const menuItems = [
   {
     title: 'Employee Info',
     children: [
-      { title: 'Employee Information', link: '/employee/info' },
+      { title: 'Employee Information', link: '/employee/information' },
       { title: 'Employee Attendance', link: '/employee/attendance' },
       { title: 'Apply Allowance', link: '/employee/allowance' },
       { title: 'Loan Issue', link: '/employee/loan-issue' },
@@ -149,16 +149,34 @@ const menuItems = [
 
 const DropdownItem = ({ item }) => {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
 
-  if (typeof item === 'string') return null;
+  let timeoutId = null;
+
+  const handleMouseEnter = () => {
+    clearTimeout(timeoutId);
+    setOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutId = setTimeout(() => {
+      setOpen(false);
+    }, 300); // delay in ms (300ms = 0.3s)
+  };
+
+
+  const isActive = item.link && location.pathname === item.link;
 
   return (
     <li
       className="relative group"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
-      <div className="px-4 py-2 flex justify-between items-center hover:bg-slate-100 cursor-pointer">
+      <div
+        className={`px-4 py-2 flex justify-between items-center hover:bg-slate-100 cursor-pointer ${isActive ? "bg-blue-100 font-semibold" : ""
+          }`}
+      >
         {item.link ? (
           <Link to={item.link} className="flex-1">
             {item.title}
@@ -168,8 +186,12 @@ const DropdownItem = ({ item }) => {
         )}
         {item.children && <ChevronRight size={16} className="ml-2" />}
       </div>
+
       {item.children && (
-        <ul className={`absolute left-full top-0 bg-white text-black shadow-md min-w-[200px] rounded ${open ? 'block' : 'hidden'}`}>
+        <ul
+          className={`absolute left-full top-0 bg-white text-black shadow-md min-w-[220px] rounded z-50 ${open ? "block" : "hidden"
+            }`}
+        >
           {item.children.map((child, idx) => (
             <DropdownItem key={idx} item={child} />
           ))}
@@ -212,7 +234,7 @@ function Header() {
         </div>
       </header>
 
-      {/* Navbar */}
+      {/* Navigation Bar */}
       <nav className="bg-slate-800 text-white px-6 py-3 shadow-md">
         <ul className="flex space-x-6">
           {menuItems.map((menu, index) => (

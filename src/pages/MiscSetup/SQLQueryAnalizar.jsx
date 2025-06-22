@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const SQLQueryAnalizar = () => {
+function SQLQueryAnalizar() {
   return (
-    <div>
-      SQLQueryAnalizar Page
-    </div>
-  );
-};
+    <div>SQLQueryAnalizar</div>
+  )
+}
 
-export default SQLQueryAnalizar;
+export default SQLQueryAnalizar

@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const BlankSheet = () => {
+function BlankSheet() {
   return (
-    <div>
-      BlankSheet Page
-    </div>
-  );
-};
+    <div>BlankSheet</div>
+  )
+}
 
-export default BlankSheet;
+export default BlankSheet

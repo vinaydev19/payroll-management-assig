@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const IDCardSetup = () => {
+function IDCardSetup() {
   return (
-    <div>
-      IDCardSetup Page
-    </div>
-  );
-};
+    <div>IDCardSetup</div>
+  )
+}
 
-export default IDCardSetup;
+export default IDCardSetup

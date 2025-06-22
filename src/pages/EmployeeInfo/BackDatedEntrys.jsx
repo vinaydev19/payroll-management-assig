@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const BackDatedEntrys = () => {
+function BackDatedEntrys() {
   return (
-    <div>
-      BackDatedEntrys Page
-    </div>
-  );
-};
+    <div>BackDatedEntrys</div>
+  )
+}
 
-export default BackDatedEntrys;
+export default BackDatedEntrys

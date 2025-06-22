@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const EmployeeIDCardCreation = () => {
+function EmployeeIDCardCreation() {
   return (
-    <div>
-      EmployeeIDCardCreation Page
-    </div>
-  );
-};
+    <div>EmployeeIDCardCreation</div>
+  )
+}
 
-export default EmployeeIDCardCreation;
+export default EmployeeIDCardCreation

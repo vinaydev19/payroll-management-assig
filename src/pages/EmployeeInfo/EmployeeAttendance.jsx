@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const EmployeeAttendance = () => {
+function EmployeeAttendance() {
   return (
-    <div>
-      EmployeeAttendance Page
-    </div>
-  );
-};
+    <div>EmployeeAttendance</div>
+  )
+}
 
-export default EmployeeAttendance;
+export default EmployeeAttendance

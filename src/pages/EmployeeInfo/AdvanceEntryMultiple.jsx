@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const AdvanceEntryMultiple = () => {
+function AdvanceEntryMultiple() {
   return (
-    <div>
-      AdvanceEntryMultiple Page
-    </div>
-  );
-};
+    <div>AdvanceEntryMultiple</div>
+  )
+}
 
-export default AdvanceEntryMultiple;
+export default AdvanceEntryMultiple

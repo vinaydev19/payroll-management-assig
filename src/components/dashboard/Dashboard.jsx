@@ -19,65 +19,63 @@ function Dashboard() {
   const [empIds, setEmpIds] = React.useState('');
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      {/* Left Side (2/3 width) */}
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-4">
+      {/* Left Section */}
       <div className="space-y-6 lg:col-span-2">
         {/* Quick Links */}
-        <div className="bg-white rounded-lg shadow p-4">
-          <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
+        <div className="bg-white rounded-xl shadow p-5">
+          <h2 className="text-lg font-semibold mb-4">Quick Links</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {quickLinks.map((q) => (
+            {quickLinks.map((link) => (
               <button
-                key={q.label}
-                className="flex flex-col items-center p-3 hover:bg-gray-100 rounded-lg transition"
+                key={link.label}
+                className="flex flex-col items-center justify-center p-3 hover:bg-slate-100 rounded-lg transition"
               >
-                <img src={q.icon} alt={q.label} className="w-12 h-12 mb-2" />
-                <span className="text-sm text-gray-700">{q.label}</span>
+                <img src={link.icon} alt={link.label} className="w-12 h-12 mb-2" />
+                <span className="text-sm text-gray-800 text-center">{link.label}</span>
               </button>
             ))}
           </div>
         </div>
 
-        {/* Print Salary-Slip */}
-        <div className="bg-white rounded-lg shadow p-4">
-          <h3 className="text-lg font-semibold mb-3">Print Salary‑Slip</h3>
-          <div className="flex space-x-2">
+        {/* Salary Slip Printing */}
+        <div className="bg-white rounded-xl shadow p-5">
+          <h2 className="text-lg font-semibold mb-4">Print Salary-Slip</h2>
+          <div className="flex flex-col sm:flex-row gap-3">
             <input
               type="text"
-              placeholder="Enter Employee IDs"
               value={empIds}
               onChange={(e) => setEmpIds(e.target.value)}
-              className="flex-1 border rounded px-3 py-2 focus:outline-none focus:ring"
+              placeholder="Enter Employee IDs"
+              className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
             />
-            <Button className="cursor-pointer">
-              Print
-            </Button>
+            <Button>Print</Button>
           </div>
           <p className="text-sm text-red-500 mt-2">
-          Enter multiple employee IDs, separated by commas (,).
+            Enter multiple employee IDs, separated by commas (,).
           </p>
         </div>
 
         {/* Notice Board */}
-        <div className="bg-white rounded-lg shadow p-4">
-          <h3 className="text-lg font-semibold mb-3">Notice Board</h3>
+        <div className="bg-white rounded-xl shadow p-5">
+          <h2 className="text-lg font-semibold mb-4">Notice Board</h2>
           <p className="text-gray-700">
             The Salary System is starting in the new web application, so be careful while doing entries...
           </p>
         </div>
       </div>
 
-      {/* Right Side (1/3 width) */}
-      <div className="space-y-6 w-full min-w-[320px]">
-        <div className="bg-white rounded-lg shadow p-4">
-          <h3 className="text-lg font-semibold mb-3">Date & Time</h3>
+      {/* Right Section */}
+      <div className="space-y-6">
+        <div className="bg-white rounded-xl shadow p-5 w-full">
+          <h2 className="text-lg font-semibold mb-4">Date & Time</h2>
           <div className="flex items-center mb-4">
-            <ClockIcon className="w-6 h-6 text-gray-600 mr-2" />
+            <ClockIcon className="w-6 h-6 text-gray-600 mr-3" />
             <div>
               <p className="text-xl font-medium">
                 {date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </p>
-              <p className="text-gray-500">
+              <p className="text-gray-500 text-sm">
                 {date.toLocaleDateString([], {
                   weekday: 'long',
                   month: 'long',
@@ -87,7 +85,11 @@ function Dashboard() {
               </p>
             </div>
           </div>
-          <Calendar mode="single" selected={date} onSelect={setDate} />
+          <div className="w-full overflow-x-auto">
+            <div className="w-full min-w-[280px] max-w-[100%]">
+              <Calendar mode="single" selected={date} onSelect={setDate} />
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -113,31 +113,51 @@ const menuItems = [
   },
 ];
 
-const DropdownItem = ({ item }) => {
+const DropdownItem = ({ item, isMobile = false, onNavigate }) => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const isActive = item.link && location.pathname === item.link;
 
+  const handleClick = () => {
+    if (item.link) {
+      onNavigate?.(); // Close mobile menu on link click
+    } else {
+      setOpen(!open); // Toggle submenu
+    }
+  };
+
   return (
-    <li
-      className="relative group"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
+    <li className={`w-full ${isMobile ? "text-white" : ""}`}>
       <div
-        className={`px-4 py-2 flex justify-between items-center hover:bg-slate-100 cursor-pointer ${isActive ? "bg-blue-100 font-semibold" : ""}`}
+        onClick={handleClick}
+        className={`flex justify-between items-center py-2 px-4 cursor-pointer hover:text-blue-400 ${isActive ? "text-blue-400 font-semibold" : ""
+          }`}
       >
         {item.link ? (
-          <Link to={item.link} className="flex-1">{item.title}</Link>
+          <Link to={item.link} onClick={onNavigate} className="w-full">{item.title}</Link>
         ) : (
           <span>{item.title}</span>
         )}
-        {item.children && <ChevronRight size={16} className="ml-2" />}
+        {item.children && (
+          <ChevronDown
+            className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+            size={16}
+          />
+        )}
       </div>
+
       {item.children && open && (
-        <ul className="absolute left-full top-0 bg-white text-black shadow-md min-w-[220px] rounded z-50">
+        <ul
+          className={`ml-4 ${isMobile ? "bg-slate-800 rounded-md" : "absolute left-full top-0 bg-white text-black shadow-md z-50 min-w-[220px]"
+            }`}
+        >
           {item.children.map((child, idx) => (
-            <DropdownItem key={idx} item={child} />
+            <DropdownItem
+              key={idx}
+              item={child}
+              isMobile={isMobile}
+              onNavigate={onNavigate}
+            />
           ))}
         </ul>
       )}
@@ -151,7 +171,7 @@ function Header() {
   const navRef = useRef(null);
 
   const toggleMenu = (index) => {
-    setOpenMenuIndex((prev) => (prev === index ? null : index));
+    setOpenMenuIndex(prev => (prev === index ? null : index));
   };
 
   useEffect(() => {
@@ -164,19 +184,19 @@ function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleNavigate = () => setMobileOpen(false);
+
   return (
     <div className="w-full">
       <header className="w-full bg-slate-900 py-4 px-6 flex items-center justify-between flex-wrap">
         <div className="flex items-center">
           <img src={logo} alt="logo" className="w-32 h-16 mr-4" />
-          <h1 className="text-slate-100 text-lg sm:text-2xl font-bold">
-            B N C M C
-          </h1>
+          <h1 className="text-white text-lg sm:text-2xl font-bold">B N C M C</h1>
         </div>
         <div className="block sm:hidden">
           <Menu size={28} className="text-white" onClick={() => setMobileOpen(!mobileOpen)} />
         </div>
-        <div className="hidden sm:flex flex-col items-end text-slate-100">
+        <div className="hidden sm:flex flex-col items-end text-white">
           <h4 className="text-base sm:text-lg font-semibold">Welcome, User</h4>
           <div className="flex gap-2 mt-2">
             <Button variant="secondary" className="text-black">My Profile</Button>
@@ -188,24 +208,47 @@ function Header() {
       <nav ref={navRef} className="bg-slate-800 text-white px-6 py-3 shadow-md">
         <ul className={`flex flex-col sm:flex-row ${mobileOpen ? "block" : "hidden sm:flex"} gap-4 sm:gap-6`}>
           {menuItems.map((menu, index) => (
-            <li key={index} className="relative">
+            <li key={index} className="relative w-full sm:w-auto">
               <div
-                className="flex items-center hover:text-blue-400 cursor-pointer"
-                onClick={() => menu.children ? toggleMenu(index) : null}
+                className="flex items-center justify-between w-full sm:w-auto cursor-pointer hover:text-blue-400"
+                onClick={() => (menu.children ? toggleMenu(index) : handleNavigate())}
               >
                 {menu.link ? (
-                  <Link to={menu.link}>{menu.title}</Link>
+                  <Link to={menu.link} onClick={handleNavigate}>{menu.title}</Link>
                 ) : (
                   <span>{menu.title}</span>
                 )}
-                {menu.children && <ChevronDown size={16} className="ml-1 mt-1" />}
+                {menu.children && (
+                  <ChevronDown
+                    size={16}
+                    className={`ml-1 transition-transform ${openMenuIndex === index ? "rotate-180" : ""}`}
+                  />
+                )}
               </div>
-              {menu.children && openMenuIndex === index && (
-                <ul className="absolute top-full left-0 bg-white text-black shadow-lg rounded mt-2 min-w-[250px] z-50">
-                  {menu.children.map((child, idx) => (
-                    <DropdownItem key={idx} item={child} />
-                  ))}
-                </ul>
+              {menu.children && (
+                <>
+                  {/* Mobile view inline menu */}
+                  {mobileOpen && (
+                    <ul className={`${openMenuIndex === index ? "block" : "hidden"} sm:hidden`}>
+                      {menu.children.map((child, idx) => (
+                        <DropdownItem
+                          key={idx}
+                          item={child}
+                          isMobile={true}
+                          onNavigate={handleNavigate}
+                        />
+                      ))}
+                    </ul>
+                  )}
+                  {/* Desktop dropdown */}
+                  {!mobileOpen && openMenuIndex === index && (
+                    <ul className="absolute top-full left-0 bg-white text-black shadow-lg rounded mt-2 min-w-[250px] z-50 hidden sm:block">
+                      {menu.children.map((child, idx) => (
+                        <DropdownItem key={idx} item={child} onNavigate={handleNavigate} />
+                      ))}
+                    </ul>
+                  )}
+                </>
               )}
             </li>
           ))}
